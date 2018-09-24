@@ -32,7 +32,7 @@ CREATE TABLE orders (
 
 
 INSERT INTO items(name, price)
-VALUES("Stol", 1), ("Bord", 2), ("Haxxorsservice", 300), ("Salas", 10);
+VALUES("Stol", 100), ("Bord", 200), ("Soffa", 300), ("Salas", 10);
 
 INSERT INTO users(username, password, adress)
 VALUES ("DaMan", "PASSWORD", "Funkytown")
