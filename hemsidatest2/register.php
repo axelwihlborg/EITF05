@@ -36,6 +36,7 @@
           
 Username: <input type="text" name="user"><br />  
 Password: <input type="password" name="pass"><br />   
+Type your password again: <input type="password" name="pass2"><br />   
 <input type="submit" value="Register" name="submit" />  
               
         </fieldset>  
@@ -46,6 +47,10 @@ if(isset($_POST["submit"])){
 if(!empty($_POST['user']) && !empty($_POST['pass'])) {  
     $user=$_POST['user'];  
     $pass=$_POST['pass'];  
+    $pass2=$_POST['pass2']; 
+if ($pass2 ==$pass){ 
+if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
+{
     $con=mysqli_connect('localhost','root','') or die(mysqli_error());  
     mysqli_select_db($con,'user_registration') or die("cannot select DB");  
   
@@ -66,9 +71,16 @@ if(!empty($_POST['user']) && !empty($_POST['pass'])) {
     echo "That username already exists! Please try again with another.";  
     }  
   
+}  else { 
+ echo "Password must be atleast 7 characters and contain atleast one uppercase letter, one lowercase letter and one number";
+}
+}  else { 
+ echo "You need to write the same password twice!";
+}
 } else {  
     echo "All fields are required!";  
-}  
+  }
+
 }  
 ?>  
 </body>  
