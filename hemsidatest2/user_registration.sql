@@ -37,7 +37,7 @@ CREATE TABLE orders (
 );
 
 
-INSERT INTO items(name, code, image, price)
+INSERT INTO items(name, code, image, price) VALUES
 ('Table', 'Table', 'product-images/table.jpg', 1500.00),
 ('Chair', 'Chair', 'product-images/chair.jpg', 800.00),
 ('Armchair', 'Armchair', 'product-images/armchair.jpg', 300.00),
