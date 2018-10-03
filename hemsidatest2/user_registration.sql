@@ -1,49 +1,44 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
---
--- Värd: 127.0.0.1
--- Tid vid skapande: 23 sep 2018 kl 22:10
--- Serverversion: 10.1.35-MariaDB
--- PHP-version: 7.2.9
+CREATE DATABASE IF NOT EXISTS user_registration;
+USE user_registration;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS login;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS items;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE login (
+  username varchar(50),
+  password varchar(255) NOT NULL,
+  adress varchar(255) NOT NULL,
+  PRIMARY KEY(username)
+);
+
+CREATE TABLE items (
+  itemid int NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  price int NOT NULL,
+  PRIMARY KEY(itemid)
+);
+
+CREATE TABLE orders (
+  ID int NOT NULL AUTO_INCREMENT,
+  orderid int NOT NULL,
+  itemid int NOT NULL,
+  username varchar(50) NOT NULL,
+  ordertime DATETIME NOT NULL,
+  PRIMARY KEY(ID),
+  FOREIGN KEY(ITEMID) REFERENCES items(itemid),
+  FOREIGN KEY(username) REFERENCES login(username)
+);
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+INSERT INTO items(name, price)
+VALUES("Stol", 100), ("Bord", 200), ("Soffa", 300), ("Salas", 10);
 
---
--- Databas: `user_registration`
---
+INSERT INTO login(username, password, adress)
+VALUES ("DaMan", "PASSWORD", "Funkytown"),
+("NolleG", "PASSWORD", "Teknolog");
 
--- --------------------------------------------------------
-
---
--- Tabellstruktur `login`
---
-
-CREATE TABLE `login` (
-  `username` varchar(200) NOT NULL,
-  `password` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Index för dumpade tabeller
---
-
---
--- Index för tabell `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`username`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

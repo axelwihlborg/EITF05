@@ -37,6 +37,7 @@
 Username: <input type="text" name="user"><br />  
 Password: <input type="password" name="pass"><br />   
 Type your password again: <input type="password" name="pass2"><br />   
+Adress: <input type: "text" name="adress"><br />
 <input type="submit" value="Register" name="submit" />  
               
         </fieldset>  
@@ -47,18 +48,19 @@ if(isset($_POST["submit"])){
 if(!empty($_POST['user']) && !empty($_POST['pass'])) {  
     $user=$_POST['user'];  
     $pass=$_POST['pass'];  
-    $pass2=$_POST['pass2']; 
+    $pass2=$_POST['pass2'];
+    $adress=$_POST['adress']; 
 if ($pass2 ==$pass){ 
 if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
 {
-    $con=mysqli_connect('localhost','root','') or die(mysqli_error());  
+    $con=mysqli_connect('localhost','root','root') or die(mysqli_error());  
     mysqli_select_db($con,'user_registration') or die("cannot select DB");  
   
     $query=mysqli_query($con,"SELECT * FROM login WHERE username='".$user."'");  
     $numrows=mysqli_num_rows($query);  
     if($numrows==0)  
     {  
-    $sql="INSERT INTO login(username,password) VALUES('$user','$pass')";  
+    $sql="INSERT INTO login(username,password,adress) VALUES('$user','$pass', '$adress')";  
   
     $result=mysqli_query($con,$sql);  
         if($result){  
