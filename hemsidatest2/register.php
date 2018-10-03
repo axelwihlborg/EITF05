@@ -53,7 +53,7 @@ if(!empty($_POST['user']) && !empty($_POST['pass'])) {
 if ($pass2 ==$pass){ 
 if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
 {
-    $con=mysqli_connect('localhost','root','root') or die(mysqli_error());  
+    $con=mysqli_connect('localhost','root','rootroot') or die(mysqli_error());  
     mysqli_select_db($con,'user_registration') or die("cannot select DB");  
   
     $query=mysqli_query($con,"SELECT * FROM login WHERE username='".$user."'");  
