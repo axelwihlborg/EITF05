@@ -17,22 +17,21 @@ CREATE TABLE login (
 );
 
 CREATE TABLE items (
-  itemid int NOT NULL AUTO_INCREMENT,
+  id int NOT NULL AUTO_INCREMENT,
   name varchar(255) NOT NULL,
   code varchar(255) NOT NULL,
   image text NOT NULL,
   price double(10,2) NOT NULL,
-  PRIMARY KEY(itemid)
+  PRIMARY KEY(id)
 );
 
 CREATE TABLE orders (
-  ID int NOT NULL AUTO_INCREMENT,
-  orderid int NOT NULL,
-  itemid int NOT NULL,
+  orderid int NOT NULL AUTO_INCREMENT,
+  id int NOT NULL,
   username varchar(50) NOT NULL,
   ordertime DATETIME NOT NULL,
-  PRIMARY KEY(ID),
-  FOREIGN KEY(ITEMID) REFERENCES items(itemid),
+  PRIMARY KEY(orderid),
+  FOREIGN KEY(id) REFERENCES items(id),
   FOREIGN KEY(username) REFERENCES login(username)
 );
 
