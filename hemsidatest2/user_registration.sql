@@ -18,8 +18,10 @@ CREATE TABLE login (
 
 CREATE TABLE items (
   itemid int NOT NULL AUTO_INCREMENT,
-  name varchar(50) NOT NULL,
-  price int NOT NULL,
+  name varchar(255) NOT NULL,
+  code varchar(255) NOT NULL,
+  image text NOT NULL,
+  price double(10,2) NOT NULL,
   PRIMARY KEY(itemid)
 );
 
@@ -35,10 +37,13 @@ CREATE TABLE orders (
 );
 
 
-INSERT INTO items(name, price)
-VALUES("Stol", 100), ("Bord", 200), ("Soffa", 300), ("Salas", 10);
+INSERT INTO items(name, code, image, price)
+('Table', 'Table', 'product-images/table.jpg', 1500.00),
+('Chair', 'Chair', 'product-images/chair.jpg', 800.00),
+('Armchair', 'Armchair', 'product-images/armchair.jpg', 300.00),
+('Desk', 'Desk', 'product-images/desk.jpg', 800.00),
+('Salas', 'Salas', 'product-images/salas.jpg', 8000.00);
 
 INSERT INTO login(username, password, adress)
 VALUES ("DaMan", "PASSWORD", "Funkytown"),
 ("NolleG", "PASSWORD", "Teknolog");
-
