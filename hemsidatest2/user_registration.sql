@@ -6,6 +6,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS login;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS commonpasswords;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -34,6 +35,11 @@ CREATE TABLE orders (
   FOREIGN KEY(id) REFERENCES items(id),
   FOREIGN KEY(username) REFERENCES login(username)
 );
+
+ CREATE TABLE commonpasswords (
+   id int NOT NULL AUTO_INCREMENT,
+   password varchar(255) NOT NULL
+ );
 
 
 INSERT INTO items(name, code, image, price) VALUES
