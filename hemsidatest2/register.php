@@ -60,7 +60,9 @@ if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
     $numrows=mysqli_num_rows($query);  
     if($numrows==0)  
     {  
-    $sql="INSERT INTO login(username,password,adress) VALUES('$user','$pass', '$adress')";  
+
+	$passhash =password_hash ($pass, PASSWORD_DEFAULT);
+    $sql="INSERT INTO login(username,password,adress) VALUES('$user','$passhash', '$adress')";  
   
     $result=mysqli_query($con,$sql);  
         if($result){  
