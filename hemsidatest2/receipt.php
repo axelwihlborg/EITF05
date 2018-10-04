@@ -2,7 +2,23 @@
 session_start();
 require_once("dbcontroller.php");
 $db_handle = new DBController();
+if(!empty($_GET["action"])) {
+  switch($_GET["action"]) {
+    case "logout":
+      unset($_SESSION["cart_item"]);
+      header("Location: login.php");
 
+  //		$db_handle->runQuery("INSERT INTO orders(orderid,	id,	username,	ordertime) VALUES(1234,1, 'Leia', 2019-01-02)");
+
+    break;
+
+    case "return":
+    unset($_SESSION["cart_item"]);
+    header("Location: index.php");
+    break;
+
+  }
+  }
 ?>
 <HTML>
 <HEAD>
@@ -10,6 +26,11 @@ $db_handle = new DBController();
 <link href="style.css" type="text/css" rel="stylesheet" />
 </HEAD>
 <BODY>
+<div class="topnav">
+  <a class="txt-heading">USER</a>
+  <a id="logout" href="receipt.php?action=logout">Logout</a>
+    <a id="logout" href="receipt.php?action=return">Return to Shopping cart</a>
+</div>
 <div id="shopping-cart">
 <div class="txt-heading">Receipt</div>
 
@@ -17,7 +38,7 @@ $db_handle = new DBController();
 if(isset($_SESSION["cart_item"])){
     $total_quantity = 0;
     $total_price = 0;
-?>	
+?>
 <table class="tbl-cart" cellpadding="10" cellspacing="1">
 <tbody>
 <tr>
@@ -26,8 +47,8 @@ if(isset($_SESSION["cart_item"])){
 <th style="text-align:right;" width="5%">Quantity</th>
 <th style="text-align:right;" width="10%">Unit Price</th>
 <th style="text-align:right;" width="10%">Price</th>
-</tr>	
-<?php		
+</tr>
+<?php
     foreach ($_SESSION["cart_item"] as $item){
         $item_price = $item["quantity"]*$item["price"];
 		?>
@@ -51,12 +72,12 @@ if(isset($_SESSION["cart_item"])){
 <td></td>
 </tr>
 </tbody>
-</table>		
+</table>
   <?php
 } else {
 ?>
 <div class="no-records">Your Cart is Empty</div>
-<?php 
+<?php
 }
 ?>
 </div>

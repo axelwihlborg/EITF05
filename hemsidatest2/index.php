@@ -42,6 +42,8 @@ switch($_GET["action"]) {
 	break;
 	case "pay":
 		header("Location: receipt.php");
+//		$db_handle->runQuery("INSERT INTO orders(orderid,	id,	username,	ordertime) VALUES(1234,1, 'Leia', 2019-01-02)");
+
 	break;
 
 }
@@ -53,6 +55,10 @@ switch($_GET["action"]) {
 <link href="style.css" type="text/css" rel="stylesheet" />
 </HEAD>
 <BODY>
+	<div class="topnav">
+	  <a class="txt-heading">USER</a>
+	  <a href="login.php">Logout</a>
+	</div>
 <div id="shopping-cart">
 <div class="txt-heading">Shopping Cart</div>
 
