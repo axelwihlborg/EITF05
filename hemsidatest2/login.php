@@ -54,7 +54,7 @@ if(!empty($_POST['user']) && !empty($_POST['pass'])) {
     while($row=mysqli_fetch_assoc($query))
     {
     //a' OR username in (SELECT username FROM login WHERE username like '%') or 'x'='x
-    //echo $row['username'];
+    //echo $row['username'], " ", $row['password'], " ";
     $dbusername=$row['username'];
     $dbpassword=$row['password'];
     }
