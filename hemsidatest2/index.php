@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once("dbcontroller.php");
+if( !isset($_SESSION['sess_user'] )){
+	header("Location: login.php");
+}
 $db_handle = new DBController();
 if(!empty($_GET["action"])) {
 switch($_GET["action"]) {
@@ -45,6 +48,10 @@ switch($_GET["action"]) {
 //		$db_handle->runQuery("INSERT INTO orders(orderid,	id,	username,	ordertime) VALUES(1234,1, 'Leia', 2019-01-02)");
 
 	break;
+	case "logout":
+		session_destroy();
+		header("Location: login.php");
+	break;
 
 }
 }
@@ -57,7 +64,7 @@ switch($_GET["action"]) {
 <BODY>
 	<div class="topnav">
 	  <a class="txt-heading">USER</a>
-	  <a href="login.php">Logout</a>
+	  <a id="logout" href="index.php?action=logout">logout</a>
 	</div>
 <div id="shopping-cart">
 <div class="txt-heading">Shopping Cart</div>

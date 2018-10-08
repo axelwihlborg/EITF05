@@ -61,8 +61,9 @@ INSERT INTO items(name, code, image, price) VALUES
 ('Salas', 'Salas', 'product-images/salas.jpg', 8000.00);
 
 INSERT INTO login(username, password, adress)
-VALUES ("DaMan", "PASSWORD", "Funkytown"),
-("NolleG", "PASSWORD", "Teknolog");
+VALUES ("Bertil", "PASSWORD", "Funkytown"),
+("Kerrigan", "PASSWORD", "Funkytown"),
+("Kalle", "PASSWORD", "Teknolog");
 
 INSERT INTO Reviews(username, timedate, subject, comment)
 VALUES( "Bertil","2018-10-05","Tried stuff","Tried to hack site, notin happen"),

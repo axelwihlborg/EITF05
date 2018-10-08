@@ -1,11 +1,14 @@
 <?php
 session_start();
+if( !isset($_SESSION['sess_user'] )){
+	header("Location: login.php");
+}
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 if(!empty($_GET["action"])) {
   switch($_GET["action"]) {
     case "logout":
-      unset($_SESSION["cart_item"]);
+      session_destroy();
       header("Location: login.php");
 
   //		$db_handle->runQuery("INSERT INTO orders(orderid,	id,	username,	ordertime) VALUES(1234,1, 'Leia', 2019-01-02)");
