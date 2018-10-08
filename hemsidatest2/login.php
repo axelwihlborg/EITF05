@@ -46,10 +46,12 @@ if(!empty($_POST['user']) && !empty($_POST['pass'])) {
     $con=mysqli_connect('localhost','root','') or die(mysqli_error());
     mysqli_select_db($con,'user_registration') or die("cannot select DB");
 
-    $query=mysqli_query($con,"SELECT username, password FROM login WHERE username='.$user.'");
+    $query=mysqli_query($con,"SELECT username, password FROM login WHERE username like '$user'");
 
-	$numrows=mysqli_num_rows($query);
-    if($numrows!=0)
+	  $numrows=mysqli_num_rows($query);
+    echo $numrows;
+
+    if($numrows != 0)
     {
     while($row=mysqli_fetch_assoc($query))
     {
@@ -69,17 +71,10 @@ if(!empty($_POST['user']) && !empty($_POST['pass'])) {
     } else {
         echo "Wrong password";
     }
+
     } else {
-      if($numrows==0){
 
     echo "Invalid username or password!";
-  } else{
-    while($row=mysqli_fetch_assoc($query))
-    {
-    echo "Username:", $row['username'], "is invalid";
-  }
-  }
-
     }
 
 } else {

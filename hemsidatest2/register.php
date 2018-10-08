@@ -70,7 +70,7 @@ if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
 
     $result=mysqli_query($con,$sql);
         if($result){
-    echo "Account Successfully Created with username";
+    echo "Account Successfully Created";
     } else {
     echo "Failure!";
     }
