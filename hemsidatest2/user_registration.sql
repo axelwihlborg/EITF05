@@ -65,7 +65,6 @@ VALUES ("DaMan", "PASSWORD", "Funkytown"),
 ("NolleG", "PASSWORD", "Teknolog");
 
 INSERT INTO Reviews(username, timedate, subject, comment)
-VALUES( "H4ckerL4rs","2018-10-05","Safest shop ever","Tried to hack this site but
-	nothing happened 10/10"),
-	( "Kalle","2019-09-07","Best site ever!!","Best site ever, so many great and good items"),
-	( "Knugen","2007-09-29","It was ok", "I would visit again");
+VALUES( "Bertil","2018-10-05","Tried stuff","Tried to hack site, notin happen"),
+	( "Kalle","2019-09-07","Great webpage.","Best site ever, stuffs are soso."),
+	( "Kerrigan","2007-09-29","It was ok", "Not dark nuff");
