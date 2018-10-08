@@ -4,6 +4,7 @@ require_once("dbcontroller.php");
 if( !isset($_SESSION['sess_user'] )){
 	header("Location: login.php");
 }
+echo $_SESSION['sess_user'];
 $db_handle = new DBController();
 if(!empty($_GET["action"])) {
 switch($_GET["action"]) {
@@ -62,8 +63,7 @@ switch($_GET["action"]) {
 <link href="style.css" type="text/css" rel="stylesheet" />
 </HEAD>
 <BODY>
-	<div class="topnav">
-	  <a class="txt-heading">USER</a>
+	<div class="topnav">	  
 	  <a id="logout" href="index.php?action=logout">logout</a>
 	</div>
 <div id="shopping-cart">
