@@ -70,7 +70,7 @@ if ($_SESSION['attempts'] < 5){
       if($user == $dbusername && password_verify($pass, $dbpassword))
       {
       $_SESSION['sess_user']=$user;
-
+      $_SESSION['attempts'] = 0;
       /* Redirect browser */
       header("Location: index.php");
       } else {
