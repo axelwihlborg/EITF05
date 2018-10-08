@@ -38,8 +38,9 @@ CREATE TABLE orders (
 
  CREATE TABLE commonpasswords (
    id int NOT NULL AUTO_INCREMENT,
-   password varchar(255) NOT NULL
- );
+   password varchar(255) NOT NULL,
+   PRIMARY KEY(id)
+);
 
 
 INSERT INTO items(name, code, image, price) VALUES
