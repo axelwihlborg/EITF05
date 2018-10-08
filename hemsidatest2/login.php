@@ -94,10 +94,6 @@ if ($_SESSION['attempts'] < 5){
 } else {
   echo "Too many failed attempts, try again later";
 }
-echo $_SESSION['attempts'];
-
-
-
 
 ?>
 </body>
