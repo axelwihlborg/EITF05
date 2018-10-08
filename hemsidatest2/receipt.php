@@ -3,6 +3,7 @@ session_start();
 if( !isset($_SESSION['sess_user'] )){
 	header("Location: login.php");
 }
+echo $_SESSION['sess_user'];
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 if(!empty($_GET["action"])) {
@@ -30,7 +31,6 @@ if(!empty($_GET["action"])) {
 </HEAD>
 <BODY>
 <div class="topnav">
-  <a class="txt-heading">USER</a>
   <a id="logout" href="receipt.php?action=logout">Logout</a>
     <a id="logout" href="receipt.php?action=return">Return to Shopping cart</a>
 </div>
