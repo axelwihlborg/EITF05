@@ -36,51 +36,69 @@ Password: <input type="password" name="pass"><br />
 <input type="submit" value="Login" name="submit" />
 </form>
 <?php
-if(isset($_POST["submit"])){
+session_start();
 
-if(!empty($_POST['user']) && !empty($_POST['pass'])) {
-    $user=$_POST['user'];
-    $pass=$_POST['pass'];
+if(!isset($_SESSION['attempts'])){
+  $_SESSION['attempts'] = 0;
+}
+
+if ($_SESSION['attempts'] < 5){
+  if(isset($_POST["submit"])){
+
+  if(!empty($_POST['user']) && !empty($_POST['pass'])) {
+      $user=$_POST['user'];
+      $pass=$_POST['pass'];
 
 
-    $con=mysqli_connect('localhost','root','') or die(mysqli_error());
-    mysqli_select_db($con,'user_registration') or die("cannot select DB");
+      $con=mysqli_connect('localhost','root','') or die(mysqli_error());
+      mysqli_select_db($con,'user_registration') or die("cannot select DB");
 
-    $query=mysqli_query($con,"SELECT username, password FROM login WHERE username like '$user'");
+      $query=mysqli_query($con,"SELECT username, password FROM login WHERE username like '$user'");
 
-	  $numrows=mysqli_num_rows($query);
-    echo $numrows;
+  	  $numrows=mysqli_num_rows($query);
 
-    if($numrows != 0)
-    {
-    while($row=mysqli_fetch_assoc($query))
-    {
-    //a' OR username in (SELECT username FROM login WHERE username like '%') or 'x'='x
-    //echo $row['username'], " ", $row['password'], " ";
-    $dbusername=$row['username'];
-    $dbpassword=$row['password'];
-    }
+      if($numrows != 0)
+      {
+      while($row=mysqli_fetch_assoc($query))
+      {
+      //a' OR username in (SELECT username FROM login WHERE username like '%') or 'x'='x
+      //echo $row['username'], " ", $row['password'], " ";
+      $dbusername=$row['username'];
+      $dbpassword=$row['password'];
+      }
 
-    if($user == $dbusername && password_verify($pass, $dbpassword))
-    {
-    session_start();
-    $_SESSION['sess_user']=$user;
+      if($user == $dbusername && password_verify($pass, $dbpassword))
+      {
+      $_SESSION['sess_user']=$user;
 
-    /* Redirect browser */
-    header("Location: index.php");
-    } else {
-        echo "Wrong password";
-    }
+      /* Redirect browser */
+      header("Location: index.php");
+      } else {
+          echo "Invalid username or password!";
+          $_SESSION['attempts']++;
 
-    } else {
 
-    echo "Invalid username or password!";
-    }
+      }
 
+      } else {
+
+      echo "Invalid username or password!";
+      $_SESSION['attempts']++;
+      }
+
+  } else {
+      echo "All fields are required!";
+
+  }
+  }
 } else {
-    echo "All fields are required!";
+  echo "Too many failed attempts, try again later";
 }
-}
+echo $_SESSION['attempts'];
+
+
+
+
 ?>
 </body>
 </html>
