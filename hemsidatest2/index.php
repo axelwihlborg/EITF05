@@ -11,7 +11,7 @@ switch($_GET["action"]) {
 	case "add":
 		if(!empty($_POST["quantity"])) {
 			$productByCode = $db_handle->runQuery("SELECT * FROM items WHERE code='" . $_GET["code"] . "'");
-			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
+			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>htmlspecialchars($_POST["quantity"],ENT_QUOTES,'UTF-8'), 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
 
 			if(!empty($_SESSION["cart_item"])) {
 				if(in_array($productByCode[0]["code"],array_keys($_SESSION["cart_item"]))) {
@@ -63,7 +63,7 @@ switch($_GET["action"]) {
 <link href="style.css" type="text/css" rel="stylesheet" />
 </HEAD>
 <BODY>
-	<div class="topnav">	  
+	<div class="topnav">
 	  <a id="logout" href="index.php?action=logout">logout</a>
 	</div>
 <div id="shopping-cart">
