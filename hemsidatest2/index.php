@@ -9,6 +9,7 @@ $db_handle = new DBController();
 if(!empty($_GET["action"])) {
 switch($_GET["action"]) {
 	case "add":
+	echo " IS GREATATATATATATAT", $_POST["quantity"];
 		if(!empty($_POST["quantity"])) {
 			$productByCode = $db_handle->runQuery("SELECT * FROM items WHERE code='" . $_GET["code"] . "'");
 			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>htmlspecialchars($_POST["quantity"],ENT_QUOTES,'UTF-8'), 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));

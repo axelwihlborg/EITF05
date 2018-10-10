@@ -46,12 +46,13 @@ if ($_SESSION['attempts'] < 5){
   if(isset($_POST["submit"])){
 
   if(!empty($_POST['user']) && !empty($_POST['pass'])) {
-      $user=mysqli_real_escape_string($_POST['user']);
+
+    $con=mysqli_connect('localhost','root','') or die(mysqli_error());
+    mysqli_select_db($con,'user_registration') or die("cannot select DB");
+
+
+      $user=mysqli_real_escape_string($con, $_POST['user']);
       $pass=$_POST['pass'];
-
-
-      $con=mysqli_connect('localhost','root','') or die(mysqli_error());
-      mysqli_select_db($con,'user_registration') or die("cannot select DB");
 
       $query=mysqli_query($con,"SELECT username, password FROM login WHERE username like '$user'");
 
