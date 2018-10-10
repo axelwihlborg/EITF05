@@ -52,7 +52,7 @@ Adress: <input type: "text" name="adress"><br />
 <?php
 if(isset($_POST["submit"]) && csrf_check($_POST['csrf'])){
 if(!empty($_POST['user']) && !empty($_POST['pass'])) {
-    $user=mysqli_real_escape_string($_POST['user']);
+    $user=$_POST['user'];
     $pass=$_POST['pass'];
     $pass2=$_POST['pass2'];
     $adress=$_POST['adress'];
@@ -61,8 +61,9 @@ if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
 {
     $con=mysqli_connect('localhost','root','') or die(mysqli_error());
     mysqli_select_db($con,'user_registration') or die("cannot select DB");
+    $cleanuser = mysqli_real_escape_string($con, $user);
 
-    $query=mysqli_query($con,"SELECT * FROM login WHERE username='.$user.'");
+    $query=mysqli_query($con,"SELECT * FROM login WHERE username='.$cleanuser.'");
     $numrows=mysqli_num_rows($query);
     if($numrows==0)
     {
