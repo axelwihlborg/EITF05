@@ -1,5 +1,7 @@
 <?php
 require_once 'commonPasswords.php';
+require_once("csrf.php");
+
  ?>
 <!doctype html>
 <html>
@@ -41,13 +43,14 @@ Username: <input type="text" name="user"><br />
 Password: <input type="password" name="pass"><br />
 Type your password again: <input type="password" name="pass2"><br />
 Adress: <input type: "text" name="adress"><br />
+<?php echo csrf_input_tag();?>
 <input type="submit" value="Register" name="submit" />
 
         </fieldset>
         </legend>
 </form>
 <?php
-if(isset($_POST["submit"])){
+if(isset($_POST["submit"]) && csrf_check($_POST['csrf'])){
 if(!empty($_POST['user']) && !empty($_POST['pass'])) {
     $user=mysqli_real_escape_string($_POST['user']);
     $pass=$_POST['pass'];

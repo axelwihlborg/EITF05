@@ -1,3 +1,5 @@
+<?php require_once("csrf.php");
+ ?>
 <!doctype html>
 <html>
 <head>
@@ -33,10 +35,12 @@
 <form action="" method="POST">
 Username: <input type="text" name="user"><br />
 Password: <input type="password" name="pass"><br />
+<?php echo csrf_input_tag();?>
 <input type="submit" value="Login" name="submit" />
 </form>
 <?php
 session_start();
+
 
 if(!isset($_SESSION['attempts'])){
   $_SESSION['attempts'] = 0;

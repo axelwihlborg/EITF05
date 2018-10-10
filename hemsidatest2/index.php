@@ -1,15 +1,16 @@
 <?php
 session_start();
 require_once("dbcontroller.php");
+require realpath("./csrf.php");
+
 if( !isset($_SESSION['sess_user'] )){
 	header("Location: login.php");
 }
 echo $_SESSION['sess_user'];
 $db_handle = new DBController();
-if(!empty($_GET["action"])) {
+if(!empty($_GET["action"]) && (csrf_check($_POST["csrf"]) || csrf_check($_GET["csrf"]))) {
 switch($_GET["action"]) {
 	case "add":
-	echo " IS GREATATATATATATAT", $_POST["quantity"];
 		if(!empty($_POST["quantity"])) {
 			$productByCode = $db_handle->runQuery("SELECT * FROM items WHERE code='" . $_GET["code"] . "'");
 			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>htmlspecialchars($_POST["quantity"],ENT_QUOTES,'UTF-8'), 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
@@ -70,8 +71,8 @@ switch($_GET["action"]) {
 <div id="shopping-cart">
 <div class="txt-heading">Shopping Cart</div>
 
-<a id="btnEmpty" href="index.php?action=empty">Empty Cart</a>
-<a id="pay" href="index.php?action=pay">Pay</a>
+<a id="btnEmpty" href="index.php?action=empty&csrf=<?php echo csrf_token(); ?>">Empty Cart</a>
+<a id="pay" href="index.php?action=pay&csrf=<?php echo csrf_token(); ?>">Pay</a>
 <?php
 if(isset($_SESSION["cart_item"])){
     $total_quantity = 0;
@@ -97,7 +98,7 @@ if(isset($_SESSION["cart_item"])){
 				<td style="text-align:right;"><?php echo $item["quantity"]; ?></td>
 				<td  style="text-align:right;"><?php echo "kr: ".$item["price"]; ?></td>
 				<td  style="text-align:right;"><?php echo "kr: ". number_format($item_price,2); ?></td>
-				<td style="text-align:center;"><a href="index.php?action=remove&code=<?php echo $item["code"]; ?>" class="btnRemoveAction"><img src="icon-delete.png" alt="Remove Item" /></a></td>
+				<td style="text-align:center;"><a href="index.php?action=remove&code=<?php echo $item["code"]; ?>&csrf=<?php echo csrf_token(); ?>" class="btnRemoveAction"><img src="icon-delete.png" alt="Remove Item" /></a></td>
 				</tr>
 				<?php
 				$total_quantity += $item["quantity"];
@@ -135,6 +136,7 @@ if(isset($_SESSION["cart_item"])){
 			<div class="product-tile-footer">
 			<div class="product-title"><?php echo $product_array[$key]["name"]; ?></div>
 			<div class="product-price"><?php echo "kr: ".$product_array[$key]["price"]; ?></div>
+			<?php echo csrf_input_tag();?>
 			<div class="cart-action"><input type="text" class="product-quantity" name="quantity" value="1" size="2" /><input type="submit" value="Add to Cart" class="btnAddAction" /></div>
 			</div>
 			</form>
