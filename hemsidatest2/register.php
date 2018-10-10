@@ -49,7 +49,7 @@ Adress: <input type: "text" name="adress"><br />
 <?php
 if(isset($_POST["submit"])){
 if(!empty($_POST['user']) && !empty($_POST['pass'])) {
-    $user=$_POST['user'];
+    $user=mysqli_real_escape_string($_POST['user']);
     $pass=$_POST['pass'];
     $pass2=$_POST['pass2'];
     $adress=$_POST['adress'];
