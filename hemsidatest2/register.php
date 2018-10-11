@@ -57,6 +57,7 @@ if(!empty($_POST['user']) && !empty($_POST['pass'])) {
     $pass2=$_POST['pass2'];
     $adress=$_POST['adress'];
 if ($pass2 ==$pass){
+if(checkPassword($pass)){
 if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
 {
     $con=mysqli_connect('localhost','root','') or die(mysqli_error());
@@ -67,8 +68,6 @@ if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
     $numrows=mysqli_num_rows($query);
     if($numrows==0)
     {
-      if(checkPassword($pass)){
-      }
 	$passhash =password_hash ($pass, PASSWORD_DEFAULT);
     $sql="INSERT INTO login(username,password,adress) VALUES('$user','$passhash', '$adress')";
 
@@ -85,6 +84,9 @@ if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/', $pass))
 
 }  else {
  echo "Password must be atleast 7 characters and contain atleast one uppercase letter, one lowercase letter and one number";
+}
+}else{
+  echo "Password is blacklisted";
 }
 }  else {
  echo "You need to write the same password twice!";
