@@ -66,7 +66,7 @@ switch($_GET["action"]) {
 </HEAD>
 <BODY>
 	<div class="topnav">
-	  <a id="logout" href="index.php?action=logout">logout</a>
+	  <a id="logout" href="index.php?action=logout&csrf=<?php echo csrf_token(); ?>">logout</a>
 	</div>
 <div id="shopping-cart">
 <div class="txt-heading">Shopping Cart</div>

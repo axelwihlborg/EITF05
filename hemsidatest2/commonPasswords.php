@@ -1,17 +1,19 @@
 <?php
 
-function checkPassword($password){
+function checkPassword($pass){
   $myfile = fopen("commonPasswords.txt", "r") or die("Unable to open file!");
-
+  $password = $pass . "\n";
   while(!feof($myfile)){
-  if(strcmp(fgets($myfile), $password) == 0) {
+  $matcher = fgets($myfile);
+  //echo $matcher, " ", $password, " ", strcmp($matcher, $password), "</br>";
+  if(strcmp($matcher, $password) == 0) {
     fclose($myfile);
-    return true;
+    return false;
   }
 }
 
   fclose($myfile);
-  return false;
+  return true;
 }
 
 
